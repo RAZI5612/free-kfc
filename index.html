@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFC Landing Page | Responsive Design</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .promo-text {
+      color: #ffffff; 
+      font-size: 1.5em;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .promo-input {
+      padding: 10px 15px;
+      border-radius: 40px; 
+      border: 2px solid #333;
+      outline: none;
+      font-size: 1em;
+      width: 150px;
+    }
+
+    .promo-input:focus {
+      border-color: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <section class="main">
+    <header>
+      <a href="#"><img src="logo.png" class="logo"></a>
+      <div class="toggle"></div>
+      <ul class="navigation">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </header>
+    <div class="content">
+      <div class="text">
+        <h2>Its Finger<br>Lickin <span>Good.</span></h2>
+        
+        <h3 class="promo-text">New Year Win a Bucket!</h3>
+        
+        <p><strong>Start the New Year with a CRUNCH! 🍗✨</strong><br>
+        New Year, New Goals... Same craving? We got you! 🤤 Keep the party going and stand a chance to WIN A FREE BUCKET to kick off 2026!</p>
+        
+        <div class="input-group">
+          <input type="text" id="userName" placeholder="Name" class="promo-input">
+          <input type="text" id="userPlace" placeholder="Place" class="promo-input">
+        </div>
+
+        <a href="#" class="btn" onclick="goToLogin(event)">Order Now</a>
+      </div>
+      <div class="slider">
+        <div class="slides active">
+          <img src="burger_fries.png">
+        </div>
+        <div class="slides">
+          <img src="french_fries.png">
+        </div>
+        <div class="slides">
+          <img src="burger.png">
+        </div>
+        <div class="slides">
+          <img src="fried_chicken.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <ul class="sci">
+        <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+        <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+        <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+      </ul>
+      <div class="prevNext">
+        <p>Always Fresh</p>
+        <span class="prev"><ion-icon name="chevron-back-outline"></ion-icon></span>
+        <span class="next"><ion-icon name="chevron-forward-outline"></ion-icon></span>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    // --- FIX 2: Added 'event' parameter and preventDefault ---
+    function goToLogin(event) {
+      // This line STOPS the link from reloading the page
+      event.preventDefault(); 
+
+      const nameInput = document.getElementById('userName');
+      const placeInput = document.getElementById('userPlace');
+      
+      const name = nameInput.value;
+      const place = placeInput.value;
+
+      if(name === "" || place === "") {
+        alert("Please enter your Name and Place to win the bucket before ordering!");
+      } else {
+        // Redirect Logic
+        console.log("Redirecting..."); // Use Inspect Element > Console to see if this appears
+        window.location.href = "login.html"; 
+      }
+    }
+    // ---------------------------------------------------------
+
+    const menutoggle = document.querySelector('.toggle');
+    const navigation = document.querySelector('.navigation');
+    menutoggle.onclick = function(){
+      menutoggle.classList.toggle('active')
+      navigation.classList.toggle('active')
+    }
+
+    const slides = document.querySelectorAll('.slides');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+    i = 0;
+    
+    function ActiveSlide(n){
+      for(slide of slides)
+      slide.classList.remove('active');
+      slides[n].classList.add('active');
+    }
+
+    next.addEventListener('click', function(){
+      if(i == slides.length - 1){ i = 0; ActiveSlide(i); }
+      else { i++; ActiveSlide(i); }
+    })
+
+     prev.addEventListener('click', function(){
+      if(i == 0){ i = slides.length - 1; ActiveSlide(i); }
+      else { i--; ActiveSlide(i); }
+    })
+  </script>
+</body>
+</html>
